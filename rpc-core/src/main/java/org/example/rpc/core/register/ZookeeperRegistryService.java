@@ -11,9 +11,11 @@ import org.apache.curator.x.discovery.details.JsonInstanceSerializer;
 import org.example.rpc.core.common.ServiceInfo;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * zk 注册服务
+ *
  * @author guolonghang
  * @date 2022年09月17日14:11:55
  */
@@ -22,11 +24,12 @@ public class ZookeeperRegistryService implements RegistryService {
 
     public static final int BASE_SLEEP_TIME_MS = 1000;
     public static final int MAX_RETRIES = 5;
-    public static final String ZK_BASE_PATH = "/demo_rpc";
+    public static final String ZK_BASE_PATH = "/opt/zookeeper-3.4.13/data/rpc1";
 
     private ServiceDiscovery<ServiceInfo> serviceDiscovery;
 
     public ZookeeperRegistryService(String registryAddr) {
+        log.info("registryAddr is {}", registryAddr);
         try {
             //新建zk客户端
             CuratorFramework client = CuratorFrameworkFactory.newClient(registryAddr, new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS, MAX_RETRIES));

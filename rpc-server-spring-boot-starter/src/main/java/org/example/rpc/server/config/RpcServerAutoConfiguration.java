@@ -1,6 +1,7 @@
 package org.example.rpc.server.config;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.rpc.core.register.RegistryService;
 import org.example.rpc.core.register.ZookeeperRegistryService;
 import org.example.rpc.server.RpcServerProvider;
@@ -21,20 +22,23 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(RpcServerProperties.class)
+@Slf4j
 public class RpcServerAutoConfiguration {
 
     @Autowired
     private RpcServerProperties properties;
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(RegistryService.class)
     public RegistryService registryService() {
+        log.info("=========zookeeper registry==========");
         return new ZookeeperRegistryService(properties.getRegistryAddr());
     }
 
     @Bean
     @ConditionalOnMissingBean(RpcServer.class)
     RpcServer RpcServer() {
+        log.info("=========NettyRpcServer registry==========");
         return new NettyRpcServer();
     }
 
@@ -43,6 +47,7 @@ public class RpcServerAutoConfiguration {
     RpcServerProvider rpcServerProvider(@Autowired RegistryService registryService,
                                         @Autowired RpcServer rpcServer,
                                         @Autowired RpcServerProperties rpcServerProperties) {
+        log.info("=========rpcServerProvider registry==========");
         return new RpcServerProvider(rpcServerProperties, registryService, rpcServer);
     }
 }

@@ -20,6 +20,6 @@ public class RpcServerProperties {
     /**
      *  注册中心地址
      */
-    private String registryAddr = "127.0.0.1:2181";
+    private String registryAddr = "0.0.0.0:2181";
 
 }

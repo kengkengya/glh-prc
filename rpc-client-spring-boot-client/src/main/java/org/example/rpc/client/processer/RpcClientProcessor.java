@@ -3,6 +3,7 @@ package org.example.rpc.client.processer;
 
 import org.example.rpc.client.annotation.RpcAutowired;
 import org.example.rpc.client.config.RpcClientProperties;
+import org.example.rpc.client.proxy.ClientStubProxyFactory;
 import org.example.rpc.core.discovery.DiscoveryService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;

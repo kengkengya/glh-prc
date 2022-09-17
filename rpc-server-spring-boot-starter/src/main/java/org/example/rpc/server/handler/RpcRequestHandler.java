@@ -64,7 +64,7 @@ public class RpcRequestHandler extends SimpleChannelInboundHandler<MessageProtoc
             channelHandlerContext.writeAndFlush(resProtocol);
 
 
-        })
+        });
     }
 
 
