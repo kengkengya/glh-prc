@@ -1,7 +1,7 @@
 package org.example.rpc.core.protocol;
 
 import lombok.Data;
-import sun.net.www.MessageHeader;
+import org.example.rpc.core.protocol.MessageHeader;
 
 import java.io.Serializable;
 

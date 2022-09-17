@@ -10,12 +10,14 @@
         <module name="rpc-provider-api" />
         <module name="rpc-consumer" />
         <module name="rpc-server-spring-boot-starter" />
+        <module name="rpc-client-spring-boot-client" />
         <module name="rpc-core" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="rpc-client-spring-boot-client" options="-parameters" />
       <module name="rpc-consumer" options="-parameters" />
       <module name="rpc-core" options="-parameters" />
       <module name="rpc-provider" options="-parameters" />

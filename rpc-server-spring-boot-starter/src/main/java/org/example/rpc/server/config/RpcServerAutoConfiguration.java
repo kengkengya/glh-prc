@@ -2,7 +2,9 @@ package org.example.rpc.server.config;
 
 
 import org.example.rpc.core.register.RegistryService;
+import org.example.rpc.core.register.ZookeeperRegistryService;
 import org.example.rpc.server.RpcServerProvider;
+import org.example.rpc.server.transport.NettyRpcServer;
 import org.example.rpc.server.transport.RpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 自动装配rpc server
- * rpc server端依赖 1、rpc 注册服务 bean 2、rpcServer 实现bean 3、rpcServer provider bean
+ * rpc server端依赖 1、rpc zk注册服务 bean 2、netty解析请求-响应bean 3、rpcServer provider bean
  *
  * @author guolonghang
  * @Date 2022年09月17日01:10:04

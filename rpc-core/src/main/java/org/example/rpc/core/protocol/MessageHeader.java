@@ -63,6 +63,7 @@ public class MessageHeader implements Serializable {
         messageHeader.setMagic(ProtocolConstants.MAGIC);
         messageHeader.setVersion(ProtocolConstants.VERSION);
         messageHeader.setRequestId(UUID.randomUUID().toString().replaceAll("-",""));
+        //消息类型；request or response
         messageHeader.setMsgType(MsgType.REQUEST.getType());
         //两种序列化格式 JSON & HESSIAN
         messageHeader.setSerialization(SerializationTypeEnum.parseByName(serialization).getType());

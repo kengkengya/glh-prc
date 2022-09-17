@@ -6,7 +6,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.example.rpc.core.protocol.MessageProtocol;
-import sun.net.www.MessageHeader;
+import org.example.rpc.core.serialization.RpcSerialization;
+import org.example.rpc.core.serialization.SerializationFactory;
+import org.example.rpc.core.serialization.SerializationTypeEnum;
+import org.example.rpc.core.protocol.MessageHeader;
 
 import java.nio.charset.Charset;
 
@@ -29,6 +32,7 @@ public class RpcEncoder<T> extends MessageToByteEncoder<MessageProtocol<T>> {
      *  |                   数据内容 （长度不定）                         |
      *  +---------------------------------------------------------------+
      *
+     * 按照指定规则对消息进行编码
      *
      * @param channelHandlerContext
      * @param messageProtocol

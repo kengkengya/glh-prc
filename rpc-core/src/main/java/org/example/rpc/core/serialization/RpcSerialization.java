@@ -1,5 +1,7 @@
 package org.example.rpc.core.serialization;
 
+import java.io.IOException;
+
 public interface RpcSerialization {
     <T> byte[] serialize(T obj) throws IOException;
 
