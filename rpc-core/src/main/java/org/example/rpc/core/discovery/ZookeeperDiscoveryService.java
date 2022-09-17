@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 public class ZookeeperDiscoveryService implements DiscoveryService {
 
     public static final int BASE_SLEEP_TIME_MS = 1000;
-    public static final int MAX_RETRIES = 10;
-    public static final String ZK_BASE_PATH = "/demo_rpc";
+    public static final int MAX_RETRIES = 3;
+    public static final String ZK_BASE_PATH = "/glh-rpc";
 
     private ServiceDiscovery<ServiceInfo> serviceDiscovery;
 
@@ -34,9 +34,7 @@ public class ZookeeperDiscoveryService implements DiscoveryService {
     public ZookeeperDiscoveryService(String registryAddr, LoadBalance loadBalance) {
         this.loadBalance = loadBalance;
         try {
-            //创建一个zk客户端进行连接zk
             CuratorFramework client = CuratorFrameworkFactory.newClient(registryAddr, new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS, MAX_RETRIES));
-            //启动zk
             client.start();
             JsonInstanceSerializer<ServiceInfo> serializer = new JsonInstanceSerializer<>(ServiceInfo.class);
             this.serviceDiscovery = ServiceDiscoveryBuilder.builder(ServiceInfo.class)
@@ -60,6 +58,7 @@ public class ZookeeperDiscoveryService implements DiscoveryService {
     @Override
     public ServiceInfo discovery(String serviceName) throws Exception {
         Collection<ServiceInstance<ServiceInfo>> serviceInstances = serviceDiscovery.queryForInstances(serviceName);
+        log.info("serviceInstances is,{}",serviceInstances);
         return CollectionUtils.isEmpty(serviceInstances) ? null
                 : loadBalance.chooseOne(serviceInstances.stream().map(ServiceInstance::getPayload).collect(Collectors.toList()));
     }

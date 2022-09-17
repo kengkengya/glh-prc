@@ -83,11 +83,11 @@ public class RpcServerProvider implements BeanPostProcessor, CommandLineRunner {
 
                 //实例化bean
                 ServiceInfo serviceInfo = new ServiceInfo();
-                serviceInfo.setServiceName(serviceName);
-                serviceInfo.setAddress(InetAddress.getLocalHost().getHostAddress());
+                serviceInfo.setServiceName(ServiceUtil.serviceKey(serviceName, version));
                 serviceInfo.setPort(properties.getPort());
-                serviceInfo.setVersion(version);
+                serviceInfo.setAddress(InetAddress.getLocalHost().getHostAddress());
                 serviceInfo.setAppName(properties.getAppName());
+
 
                 //注册到zk中
                 registryService.register(serviceInfo);
